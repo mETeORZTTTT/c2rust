@@ -1,53 +1,16 @@
-2025-05-25 19:52:32,176 - INFO - 初始化函数总结生成器...
-2025-05-25 19:52:32,176 - INFO - 初始化函数总结生成器
-2025-05-25 19:52:32,278 - INFO - 使用输入文件: data/converted_architecture.json
-2025-05-25 19:52:32,278 - INFO - 最大处理项数: 1000
-2025-05-25 19:52:32,278 - INFO - ================================================================================
-2025-05-25 19:52:32,278 - INFO - 开始处理架构文件: data/converted_architecture.json
-2025-05-25 19:52:32,278 - INFO - ================================================================================
-2025-05-25 19:52:32,280 - INFO - 检测到现有输出文件: data/converted_architecture_with_summaries.json，读取已处理状态
-2025-05-25 19:52:32,282 - WARNING - 函数缺少必要信息: zopfli::main()
-2025-05-25 19:52:32,282 - INFO - 找到 7 个需要生成总结的函数
-2025-05-25 19:52:32,282 - INFO - 已有 95 个函数有总结
-2025-05-25 19:52:32,282 - INFO - 开始处理函数 [1/7] (14.3%): zopfli::functions::AddDynamicTree(const unsigned int *, const unsigned int *, unsigned char *, unsigned char **, size_t *)
-2025-05-25 19:52:32,282 - INFO - 开始生成函数总结: zopfli::functions::AddDynamicTree(const unsigned int *, const unsigned int *, unsigned char *, unsigned char **, size_t *)
-2025-05-25 19:52:32,282 - INFO - 开始第 1 轮总结生成
-2025-05-25 19:52:41,422 - INFO - 函数总结审核通过: zopfli::functions::AddDynamicTree(const unsigned int *, const unsigned int *, unsigned char *, unsigned char **, size_t *) (第 1 轮)
-2025-05-25 19:52:41,423 - INFO - 成功生成函数总结 [1/7]: zopfli::functions::AddDynamicTree(const unsigned int *, const unsigned int *, unsigned char *, unsigned char **, size_t *) (用了 1 轮)
-2025-05-25 19:52:41,423 - INFO - 开始处理函数 [2/7] (28.6%): zopfli::functions::AddLZ77Block(const ZopfliOptions *, int, int, const ZopfliLZ77Store *, size_t, size_t, size_t, unsigned char *, unsigned char **, size_t *)
-2025-05-25 19:52:41,423 - INFO - 开始生成函数总结: zopfli::functions::AddLZ77Block(const ZopfliOptions *, int, int, const ZopfliLZ77Store *, size_t, size_t, size_t, unsigned char *, unsigned char **, size_t *)
-2025-05-25 19:52:41,424 - INFO - 开始第 1 轮总结生成
-2025-05-25 19:52:58,368 - INFO - 函数总结审核通过: zopfli::functions::AddLZ77Block(const ZopfliOptions *, int, int, const ZopfliLZ77Store *, size_t, size_t, size_t, unsigned char *, unsigned char **, size_t *) (第 1 轮)
-2025-05-25 19:52:58,368 - INFO - 成功生成函数总结 [2/7]: zopfli::functions::AddLZ77Block(const ZopfliOptions *, int, int, const ZopfliLZ77Store *, size_t, size_t, size_t, unsigned char *, unsigned char **, size_t *) (用了 1 轮)
-2025-05-25 19:52:58,369 - INFO - 开始处理函数 [3/7] (42.9%): zopfli::functions::AddLZ77BlockAutoType(const ZopfliOptions *, int, const ZopfliLZ77Store *, size_t, size_t, size_t, unsigned char *, unsigned char **, size_t *)
-2025-05-25 19:52:58,369 - INFO - 开始生成函数总结: zopfli::functions::AddLZ77BlockAutoType(const ZopfliOptions *, int, const ZopfliLZ77Store *, size_t, size_t, size_t, unsigned char *, unsigned char **, size_t *)
-2025-05-25 19:52:58,371 - INFO - 开始第 1 轮总结生成
-2025-05-25 19:53:12,748 - INFO - 函数总结审核通过: zopfli::functions::AddLZ77BlockAutoType(const ZopfliOptions *, int, const ZopfliLZ77Store *, size_t, size_t, size_t, unsigned char *, unsigned char **, size_t *) (第 1 轮)
-2025-05-25 19:53:12,748 - INFO - 成功生成函数总结 [3/7]: zopfli::functions::AddLZ77BlockAutoType(const ZopfliOptions *, int, const ZopfliLZ77Store *, size_t, size_t, size_t, unsigned char *, unsigned char **, size_t *) (用了 1 轮)
-2025-05-25 19:53:12,748 - INFO - 开始处理函数 [4/7] (57.1%): zopfli::functions::ZopfliDeflatePart(const ZopfliOptions *, int, int, const unsigned char *, size_t, size_t, unsigned char *, unsigned char **, size_t *)
-2025-05-25 19:53:12,748 - INFO - 开始生成函数总结: zopfli::functions::ZopfliDeflatePart(const ZopfliOptions *, int, int, const unsigned char *, size_t, size_t, unsigned char *, unsigned char **, size_t *)
-2025-05-25 19:53:12,749 - INFO - 开始第 1 轮总结生成
-2025-05-25 19:53:29,591 - INFO - 函数总结审核通过: zopfli::functions::ZopfliDeflatePart(const ZopfliOptions *, int, int, const unsigned char *, size_t, size_t, unsigned char *, unsigned char **, size_t *) (第 1 轮)
-2025-05-25 19:53:29,591 - INFO - 成功生成函数总结 [4/7]: zopfli::functions::ZopfliDeflatePart(const ZopfliOptions *, int, int, const unsigned char *, size_t, size_t, unsigned char *, unsigned char **, size_t *) (用了 1 轮)
-2025-05-25 19:53:29,592 - INFO - 开始处理函数 [5/7] (71.4%): zopfli::functions::ZopfliDeflate(const ZopfliOptions *, int, int, const unsigned char *, size_t, unsigned char *, unsigned char **, size_t *)
-2025-05-25 19:53:29,592 - INFO - 开始生成函数总结: zopfli::functions::ZopfliDeflate(const ZopfliOptions *, int, int, const unsigned char *, size_t, unsigned char *, unsigned char **, size_t *)
-2025-05-25 19:53:29,593 - INFO - 开始第 1 轮总结生成
-2025-05-25 19:53:38,601 - INFO - 函数总结审核通过: zopfli::functions::ZopfliDeflate(const ZopfliOptions *, int, int, const unsigned char *, size_t, unsigned char *, unsigned char **, size_t *) (第 1 轮)
-2025-05-25 19:53:38,601 - INFO - 成功生成函数总结 [5/7]: zopfli::functions::ZopfliDeflate(const ZopfliOptions *, int, int, const unsigned char *, size_t, unsigned char *, unsigned char **, size_t *) (用了 1 轮)
-2025-05-25 19:53:38,616 - INFO - 已处理 5/7 个函数，中间结果已保存
-2025-05-25 19:53:38,617 - INFO - 开始处理函数 [6/7] (85.7%): zopfli::functions::single_test(const unsigned char *, int, int, int)
-2025-05-25 19:53:38,617 - INFO - 开始生成函数总结: zopfli::functions::single_test(const unsigned char *, int, int, int)
-2025-05-25 19:53:38,617 - INFO - 开始第 1 轮总结生成
-2025-05-25 19:53:48,294 - INFO - 函数总结审核通过: zopfli::functions::single_test(const unsigned char *, int, int, int) (第 1 轮)
-2025-05-25 19:53:48,294 - INFO - 成功生成函数总结 [6/7]: zopfli::functions::single_test(const unsigned char *, int, int, int) (用了 1 轮)
-2025-05-25 19:53:48,294 - INFO - 开始处理函数 [7/7] (100.0%): zopfli::functions::run_all_tests(const unsigned char *)
-2025-05-25 19:53:48,294 - INFO - 开始生成函数总结: zopfli::functions::run_all_tests(const unsigned char *)
-2025-05-25 19:53:48,295 - INFO - 开始第 1 轮总结生成
-2025-05-25 19:53:54,653 - INFO - 函数总结审核通过: zopfli::functions::run_all_tests(const unsigned char *) (第 1 轮)
-2025-05-25 19:53:54,653 - INFO - 成功生成函数总结 [7/7]: zopfli::functions::run_all_tests(const unsigned char *) (用了 1 轮)
-2025-05-25 19:53:54,653 - WARNING - 无法继续处理，可能存在循环依赖
-2025-05-25 19:53:54,669 - INFO - ================================================================================
-2025-05-25 19:53:54,669 - INFO - 处理完成: 成功=7, 失败=0, 总计=7/7
-2025-05-25 19:53:54,669 - INFO - 结果已保存到: data/converted_architecture_with_summaries.json
-2025-05-25 19:53:54,669 - INFO - ================================================================================
-2025-05-25 19:53:54,670 - INFO - 函数总结生成完成!
+2025-05-25 20:00:38,942 - INFO - 初始化函数总结生成器...
+2025-05-25 20:00:38,942 - INFO - 初始化函数总结生成器
+2025-05-25 20:00:39,047 - INFO - 使用输入文件: data/converted_architecture.json
+2025-05-25 20:00:39,047 - INFO - 最大处理项数: 1000
+2025-05-25 20:00:39,047 - INFO - ================================================================================
+2025-05-25 20:00:39,047 - INFO - 开始处理架构文件: data/converted_architecture.json
+2025-05-25 20:00:39,047 - INFO - ================================================================================
+2025-05-25 20:00:39,050 - INFO - 检测到现有输出文件: data/converted_architecture_with_summaries.json，读取已处理状态
+2025-05-25 20:00:39,052 - WARNING - 函数缺少必要信息: zopfli::main()
+2025-05-25 20:00:39,052 - INFO - 找到 0 个需要生成总结的函数
+2025-05-25 20:00:39,052 - INFO - 已有 102 个函数有总结
+2025-05-25 20:00:39,057 - INFO - ================================================================================
+2025-05-25 20:00:39,057 - INFO - 处理完成: 成功=0, 失败=0, 总计=0/0
+2025-05-25 20:00:39,057 - INFO - 结果已保存到: data/converted_architecture_with_summaries.json
+2025-05-25 20:00:39,057 - INFO - ================================================================================
+2025-05-25 20:00:39,057 - INFO - 函数总结生成完成!

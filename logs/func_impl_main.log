@@ -1,0 +1,114 @@
+2025-05-25 23:21:02,182 - INFO - 初始化函数实现生成器
+2025-05-25 23:21:02,440 - INFO - ✅ 初始化完成 - 使用模型: gpt-4o
+2025-05-25 23:21:02,440 - INFO - 开始从JSON生成函数实现: data/converted_architecture_with_summaries.json
+2025-05-25 23:21:02,445 - INFO - 跳过已处理的函数: ZopfliLengthLimitedCodeLengths(const size_t *, int, int, unsigned int *)
+2025-05-25 23:21:02,445 - INFO - 跳过已处理的函数: ZopfliCalculateBitLengths(const size_t *, size_t, int, unsigned int *)
+2025-05-25 23:21:02,445 - INFO - 跳过已处理的函数: ZopfliLengthsToSymbols(const unsigned int *, size_t, unsigned int, unsigned int *)
+2025-05-25 23:21:02,445 - INFO - 跳过已处理的函数: ZopfliLZ77GetByteRange(const ZopfliLZ77Store *, size_t, size_t)
+2025-05-25 23:21:02,445 - INFO - 跳过已处理的函数: ZopfliMaxCachedSublen(const ZopfliLongestMatchCache *, size_t, size_t)
+2025-05-25 23:21:02,445 - INFO - 跳过已处理的函数: ZopfliSublenToCache(const unsigned short *, size_t, size_t, ZopfliLongestMatchCache *)
+2025-05-25 23:21:02,445 - INFO - 跳过已处理的函数: ZopfliCacheToSublen(const ZopfliLongestMatchCache *, size_t, size_t, unsigned short *)
+2025-05-25 23:21:02,445 - INFO - 跳过已处理的函数: ZopfliVerifyLenDist(const unsigned char *, size_t, size_t, unsigned short, unsigned short)
+2025-05-25 23:21:02,445 - INFO - 跳过已处理的函数: ZopfliWarmupHash(const unsigned char *, size_t, size_t, ZopfliHash *)
+2025-05-25 23:21:02,445 - INFO - 跳过已处理的函数: ZopfliStoreLitLenDist(unsigned short, unsigned short, size_t, ZopfliLZ77Store *)
+2025-05-25 23:21:02,445 - INFO - 跳过已处理的函数: ZopfliUpdateHash(const unsigned char *, size_t, size_t, ZopfliHash *)
+2025-05-25 23:21:02,445 - INFO - 跳过已处理的函数: ZopfliResetHash(size_t, ZopfliHash *)
+2025-05-25 23:21:02,445 - INFO - 跳过已处理的函数: ZopfliCleanHash(ZopfliHash *)
+2025-05-25 23:21:02,445 - INFO - 跳过已处理的函数: ZopfliAllocHash(size_t, ZopfliHash *)
+2025-05-25 23:21:02,445 - INFO - 跳过已处理的函数: ZopfliCleanCache(ZopfliLongestMatchCache *)
+2025-05-25 23:21:02,445 - INFO - 跳过已处理的函数: ZopfliInitCache(size_t, ZopfliLongestMatchCache *)
+2025-05-25 23:21:02,445 - INFO - 跳过已处理的函数: ZopfliCleanLZ77Store(ZopfliLZ77Store *)
+2025-05-25 23:21:02,445 - INFO - 跳过已处理的函数: ZopfliInitLZ77Store(const unsigned char *, ZopfliLZ77Store *)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: ZopfliCalculateBlockSizeAutoType(const ZopfliLZ77Store *, size_t, size_t)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: ZopfliCalculateEntropy(const size_t *, size_t, double *)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: ZopfliCopyLZ77Store(const ZopfliLZ77Store *, ZopfliLZ77Store *)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: ZopfliAppendLZ77Store(const ZopfliLZ77Store *, ZopfliLZ77Store *)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: ZopfliGetLengthSymbol(int)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: ZopfliGetDistSymbol(int)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: AbsDiff(size_t, size_t)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: OptimizeHuffmanForRle(int, size_t *)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: ZopfliGetDistSymbolExtraBits(int)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: ZopfliGetLengthSymbolExtraBits(int)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: LeafComparator(const void *, const void *)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: ExtractBitLengths(Node *, Node *, unsigned int *)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: InitNode(size_t, int, Node *, Node *)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: InitLists(NodePool *, const Node *, int, Node *(*)[2])
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: BoundaryPMFinal(Node *(*)[2], Node *, int, NodePool *, int)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: BoundaryPM(Node *(*)[2], Node *, int, NodePool *, int)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: AddHuffmanBits(unsigned int, unsigned int, unsigned char *, unsigned char **, size_t *)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: AddBits(unsigned int, unsigned int, unsigned char *, unsigned char **, size_t *)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: CalculateTreeSize(const unsigned int *, const unsigned int *)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: PatchDistanceCodesForBuggyDecoders(unsigned int *)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: GetFixedTree(unsigned int *, unsigned int *)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: EstimateCost(const ZopfliLZ77Store *, size_t, size_t)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: ZopfliGetDistExtraBits(int)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: GetCostFixed(unsigned int, unsigned int, void *)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: AddBit(int, unsigned char *, unsigned char **, size_t *)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: ZopfliGetLengthExtraBitsValue(int)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: ZopfliGetDistExtraBitsValue(int)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: GetMatch(const unsigned char *, const unsigned char *, const unsigned char *, const unsigned char *)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: UpdateHashValue(ZopfliHash *, unsigned char)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: TraceBackwards(size_t, const unsigned short *, unsigned short **, size_t *)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: zopfli_min(size_t, size_t)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: GetCostModelMinCost(CostModelFun *, void *)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: GetLengthScore(int, int)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: Ran(RanState *)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: RandomizeFreqs(RanState *, size_t *, int)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: InitRanState(RanState *)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: CeilDiv(size_t, size_t)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: FindLargestSplittableBlock(size_t, const unsigned char *, const size_t *, size_t, size_t *, size_t *)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: PrintBlockSplitPoints(const ZopfliLZ77Store *, const size_t *, size_t)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: AddSorted(size_t, size_t **, size_t *)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: FindMinimum(FindMinimumFun, void *, size_t, size_t, double *)
+2025-05-25 23:21:02,446 - INFO - 跳过已处理的函数: run_all_tests(const unsigned char *)
+2025-05-25 23:21:02,446 - INFO - 找到 102 个可实现函数
+2025-05-25 23:21:02,446 - DEBUG - 跳过已处理的函数: ZopfliLengthLimitedCodeLengths(const size_t *, int, int, unsigned int *)
+2025-05-25 23:21:02,446 - DEBUG - 跳过已处理的函数: ZopfliCalculateBitLengths(const size_t *, size_t, int, unsigned int *)
+2025-05-25 23:21:02,446 - DEBUG - 跳过已处理的函数: ZopfliLengthsToSymbols(const unsigned int *, size_t, unsigned int, unsigned int *)
+2025-05-25 23:21:02,446 - DEBUG - 未实现的依赖项: zopfli::ZopfliLZ77GetHistogramAt(const ZopfliLZ77Store *, size_t, size_t *, size_t *)
+2025-05-25 23:21:02,446 - INFO - 函数 ZopfliLZ77GetHistogram(const ZopfliLZ77Store *, size_t, size_t, size_t *, size_t *) 的依赖项尚未全部实现，暂时跳过
+2025-05-25 23:21:02,446 - DEBUG - 跳过已处理的函数: ZopfliLZ77GetByteRange(const ZopfliLZ77Store *, size_t, size_t)
+2025-05-25 23:21:02,446 - DEBUG - 未实现的依赖项: zopfli::CalculateBlockSymbolSize(const unsigned int *, const unsigned int *, const ZopfliLZ77Store *, size_t, size_t), zopfli::GetDynamicLengths(const ZopfliLZ77Store *, size_t, size_t, unsigned int *, unsigned int *)
+2025-05-25 23:21:02,446 - INFO - 函数 ZopfliCalculateBlockSize(const ZopfliLZ77Store *, size_t, size_t, int) 的依赖项尚未全部实现，暂时跳过
+2025-05-25 23:21:02,446 - DEBUG - 跳过已处理的函数: ZopfliMaxCachedSublen(const ZopfliLongestMatchCache *, size_t, size_t)
+2025-05-25 23:21:02,446 - DEBUG - 跳过已处理的函数: ZopfliSublenToCache(const unsigned short *, size_t, size_t, ZopfliLongestMatchCache *)
+2025-05-25 23:21:02,446 - DEBUG - 跳过已处理的函数: ZopfliCacheToSublen(const ZopfliLongestMatchCache *, size_t, size_t, unsigned short *)
+2025-05-25 23:21:02,446 - DEBUG - 未实现的依赖项: zopfli::TryGetFromLongestMatchCache(ZopfliBlockState *, size_t, size_t *, unsigned short *, unsigned short *, unsigned short *), zopfli::StoreInLongestMatchCache(ZopfliBlockState *, size_t, size_t, const unsigned short *, unsigned short, unsigned short)
+2025-05-25 23:21:02,446 - INFO - 函数 ZopfliFindLongestMatch(ZopfliBlockState *, const ZopfliHash *, const unsigned char *, size_t, size_t, size_t, unsigned short *, unsigned short *, unsigned short *) 的依赖项尚未全部实现，暂时跳过
+2025-05-25 23:21:02,447 - DEBUG - 跳过已处理的函数: ZopfliVerifyLenDist(const unsigned char *, size_t, size_t, unsigned short, unsigned short)
+2025-05-25 23:21:02,447 - DEBUG - 跳过已处理的函数: ZopfliWarmupHash(const unsigned char *, size_t, size_t, ZopfliHash *)
+2025-05-25 23:21:02,447 - DEBUG - 跳过已处理的函数: ZopfliStoreLitLenDist(unsigned short, unsigned short, size_t, ZopfliLZ77Store *)
+2025-05-25 23:21:02,447 - DEBUG - 跳过已处理的函数: ZopfliUpdateHash(const unsigned char *, size_t, size_t, ZopfliHash *)
+2025-05-25 23:21:02,447 - DEBUG - 跳过已处理的函数: ZopfliResetHash(size_t, ZopfliHash *)
+2025-05-25 23:21:02,447 - DEBUG - 跳过已处理的函数: ZopfliCleanHash(ZopfliHash *)
+2025-05-25 23:21:02,447 - DEBUG - 未实现的依赖项: zopfli::LZ77OptimalRun(ZopfliBlockState *, const unsigned char *, size_t, size_t, unsigned short **, size_t *, unsigned short *, CostModelFun *, void *, ZopfliLZ77Store *, ZopfliHash *, float *)
+2025-05-25 23:21:02,447 - INFO - 函数 ZopfliLZ77OptimalFixed(ZopfliBlockState *, const unsigned char *, size_t, size_t, ZopfliLZ77Store *) 的依赖项尚未全部实现，暂时跳过
+2025-05-25 23:21:02,447 - DEBUG - 跳过已处理的函数: ZopfliAllocHash(size_t, ZopfliHash *)
+2025-05-25 23:21:02,447 - INFO - [1/102] 开始生成函数实现: ZopfliCleanBlockState(ZopfliBlockState *)
+2025-05-25 23:21:02,447 - INFO - 为函数 ZopfliCleanBlockState(ZopfliBlockState *) 启动生成-审核循环
+2025-05-25 23:21:02,447 - INFO - 开始第 1/3 轮生成-审核
+2025-05-25 23:21:11,213 - INFO - 函数 ZopfliCleanBlockState(ZopfliBlockState *) 第 1 轮审核通过
+2025-05-25 23:21:11,213 - INFO - 检查函数实现的编译状态
+2025-05-25 23:21:13,214 - WARNING - [1/102] ⚠️ 编译失败，尝试修复: ZopfliCleanBlockState(ZopfliBlockState *)
+2025-05-25 23:21:13,214 - INFO - 开始修复编译错误 (共 4 个)
+2025-05-25 23:21:13,214 - INFO - 修复轮次 1/5
+2025-05-25 23:21:15,210 - INFO - 检查函数实现的编译状态
+2025-05-25 23:21:16,490 - WARNING - 轮次 1 后仍有 4 个编译错误
+2025-05-25 23:21:16,490 - INFO - 修复轮次 2/5
+2025-05-25 23:21:19,051 - INFO - 检查函数实现的编译状态
+2025-05-25 23:21:20,584 - WARNING - 轮次 2 后仍有 4 个编译错误
+2025-05-25 23:21:20,584 - INFO - 修复轮次 3/5
+2025-05-25 23:21:22,930 - INFO - 检查函数实现的编译状态
+2025-05-25 23:21:24,176 - WARNING - 轮次 3 后仍有 4 个编译错误
+2025-05-25 23:21:24,176 - INFO - 修复轮次 4/5
+2025-05-25 23:21:26,878 - INFO - 检查函数实现的编译状态
+2025-05-25 23:21:28,143 - WARNING - 轮次 4 后仍有 4 个编译错误
+2025-05-25 23:21:28,143 - INFO - 修复轮次 5/5
+2025-05-25 23:21:29,774 - INFO - 检查函数实现的编译状态
+2025-05-25 23:21:32,076 - WARNING - 轮次 5 后仍有 4 个编译错误
+2025-05-25 23:21:32,076 - ERROR - 达到最大修复轮数，修复失败
+2025-05-25 23:21:32,076 - ERROR - [1/102] ❌ 编译错误修复失败: ZopfliCleanBlockState(ZopfliBlockState *)
+2025-05-25 23:21:32,076 - DEBUG - 跳过已处理的函数: ZopfliCleanCache(ZopfliLongestMatchCache *)
+2025-05-25 23:21:32,076 - INFO - [2/102] 开始生成函数实现: ZopfliInitBlockState(const ZopfliOptions *, size_t, size_t, int, ZopfliBlockState *)
+2025-05-25 23:21:32,076 - INFO - 为函数 ZopfliInitBlockState(const ZopfliOptions *, size_t, size_t, int, ZopfliBlockState *) 启动生成-审核循环
+2025-05-25 23:21:32,076 - INFO - 开始第 1/3 轮生成-审核

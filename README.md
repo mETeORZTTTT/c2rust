@@ -203,3 +203,8 @@ MIT
 
 TODO：
 defines typedfes注意有没有函数实现
+
+python3 c2rust_converter_new.py \
+  --enable-compile-check \
+  --generate-validation \
+  --max-items 1000
