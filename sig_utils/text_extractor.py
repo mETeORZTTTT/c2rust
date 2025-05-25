@@ -59,10 +59,10 @@ class TextExtractor:
             pass
         
         # 方法4：找到完整的JSON对象
-            start = text.find('{')
-            end = text.rfind('}')
-            if start != -1 and end != -1 and start < end:
-                json_text = text[start:end+1]
+        start = text.find('{')
+        end = text.rfind('}')
+        if start != -1 and end != -1 and start < end:
+            json_text = text[start:end+1]
             
             # 直接尝试解析
             try:

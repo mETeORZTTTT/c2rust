@@ -202,27 +202,27 @@ class C2RustConverter:
 - 如果涉及C ABI，使用：`type FuncName = unsafe extern "C" fn(param_types) -> return_type;`
 - 只输出一行类型定义，不要添加其他代码
 """
-            
-            if special_structures_text:
-                json_prompt += f"""
+        
+        if special_structures_text:
+            json_prompt += f"""
 ## 代码分析
 我已检测到代码中包含以下特殊结构，请在转换时特别注意：
 {special_structures_text}
 """
-            
-            if dependencies_text:
-                json_prompt += f"""
+        
+        if dependencies_text:
+            json_prompt += f"""
 {dependencies_text}
 请在转换时参考上述依赖项的Rust代码，保持一致的风格和命名。
 """
-            
-            # 添加对函数的特殊指示
-            if kind == "function":
-                json_prompt += """
+        
+        # 添加对函数的特殊指示
+        if kind == "function":
+            json_prompt += """
 ## 特别注意
 只转换函数签名，不实现函数体。函数体使用 { unimplemented!() } 或 { todo!() } 占位。
 """
-            
+        
         json_prompt += """
 ## 转换要求
 请按照Rust的惯用法进行转换，尽量使用安全Rust特性，只在必要时使用unsafe。
@@ -533,29 +533,29 @@ class C2RustConverter:
                                 self.cross_file_validator.global_converted_items[unique_key] = code_item
                                 self.cross_file_validator._update_global_state(code_item)
                         
-                    self.stats.record_success(item_id, kind, round_num, {
-                        "c_code": c_code,
+                        self.stats.record_success(item_id, kind, round_num, {
+                            "c_code": c_code,
                             "rust_code": rust_code,
                             "json_response": rust_response_json,
                             "ai_detection": detection_result,
                             "compile_result": attempt_record.get("compile_result"),
                             "fix_result": attempt_record.get("fix_result")
-                    })
-                    result = {
-                        "success": True,
-                        "rust_code": rust_code,
-                        "rounds": round_num,
+                        })
+                        result = {
+                            "success": True,
+                            "rust_code": rust_code,
+                            "rounds": round_num,
                             "conversion_history": conversion_history,
                             "json_response": rust_response_json,
                             "ai_detection": detection_result,
                             "compile_result": attempt_record.get("compile_result"),
                             "fix_result": attempt_record.get("fix_result")
-                    }
-                    item_logger.info(f"转换成功，用了{round_num}轮")
-                    item_logger.info(f"最终Rust代码:\n{rust_code}")
-                    ai_dialog_logger.info(f"转换成功，最终代码: {rust_code}")
-                    return result
-                else:
+                        }
+                        item_logger.info(f"转换成功，用了{round_num}轮")
+                        item_logger.info(f"最终Rust代码:\n{rust_code}")
+                        ai_dialog_logger.info(f"转换成功，最终代码: {rust_code}")
+                        return result
+                    else:
                         # AI检测发现问题
                         violations = detection_result["violations"]
                         # 处理violations可能是字典列表的情况
@@ -1192,23 +1192,23 @@ class C2RustConverter:
                 if dep_name in data[dep_file][dep_type]:
                     item = data[dep_file][dep_type][dep_name]
                     if item.get("conversion_status") == "success":
+                        return True
+                
+                # 如果直接匹配失败，尝试通过name字段匹配
+                for item_key, item_data in data[dep_file][dep_type].items():
+                    if item_data.get("conversion_status") == "success":
+                        # 检查name字段是否匹配
+                        if item_data.get("name") == dep_name:
+                            main_logger.debug(f"通过name字段匹配到依赖: {dep_name} -> {item_key}")
                             return True
-                    
-                    # 如果直接匹配失败，尝试通过name字段匹配
-                    for item_key, item_data in data[dep_file][dep_type].items():
-                        if item_data.get("conversion_status") == "success":
-                            # 检查name字段是否匹配
-                            if item_data.get("name") == dep_name:
-                                main_logger.debug(f"通过name字段匹配到依赖: {dep_name} -> {item_key}")
+                        
+                        # 检查从rust_signature中提取的类型名是否匹配
+                        rust_signature = item_data.get("rust_signature", "")
+                        if rust_signature:
+                            extracted_name = self._extract_type_name_from_rust_code(rust_signature, dep_type)
+                            if extracted_name == dep_name:
+                                main_logger.debug(f"通过提取类型名匹配到依赖: {dep_name} -> {item_key}")
                                 return True
-                            
-                            # 检查从rust_signature中提取的类型名是否匹配
-                            rust_signature = item_data.get("rust_signature", "")
-                            if rust_signature:
-                                extracted_name = self._extract_type_name_from_rust_code(rust_signature, dep_type)
-                                if extracted_name == dep_name:
-                                    main_logger.debug(f"通过提取类型名匹配到依赖: {dep_name} -> {item_key}")
-                                    return True
             
             # 如果指定类型中找不到，搜索其他类型（解决类型分类错误问题）
             for actual_type in ["fields", "defines", "typedefs", "structs", "functions"]:
@@ -1230,7 +1230,7 @@ class C2RustConverter:
                         if item_data.get("conversion_status") == "success":
                             if item_data.get("name") == dep_name:
                                 main_logger.debug(f"跨类型通过name字段匹配到依赖: {dep_name} -> {actual_type}::{item_key}")
-                    return True
+                                return True
         
         return False
 
@@ -1246,7 +1246,7 @@ class C2RustConverter:
         
         if not dep_type or not dep_qualified_name:
             return dependency_code
-            
+        
         # 解析依赖名称
         dep_parts = dep_qualified_name.split("::")
         if len(dep_parts) < 2:
@@ -1270,9 +1270,10 @@ class C2RustConverter:
                             rust_code = self._generate_default_implementation(rust_code)
                     
                     dependency_code[dep_id] = rust_code
-            return dependency_code
-        # 如果直接匹配失败，尝试通过name字段匹配
-        for item_key, item_data in data[dep_file][dep_type].items():
+                    return dependency_code
+            
+            # 如果直接匹配失败，尝试通过name字段匹配
+            for item_key, item_data in data[dep_file][dep_type].items():
                 if item_data.get("conversion_status") == "success":
                     # 检查name字段是否匹配
                     if item_data.get("name") == dep_name:

@@ -233,17 +233,7 @@ class CrossFileValidator:
             bool: 是否成功添加（如果重复会返回False）
         """
         # 提取实际的类型名进行去重
-        actual_name = self._extract_actual_name(rust_code, kind)
-        
-        # 检查是否存在同名项目
-        if actual_name:
-            # 检查全局项目中是否已有同名项目 
-            for existing_item in self.global_converted_items.values():
-                existing_name = self._extract_actual_name(existing_item.rust_code, existing_item.kind)
-                if existing_name == actual_name:
-                    logger.warning(f"跳过重复定义: {actual_name} (来自 {file_name}::{kind}::{item_name}, "
-                                  f"已有来自 {existing_item.file_name}::{existing_item.kind}::{existing_item.item_name})")
-                    return False
+        actual_name = self._extract_type_name_from_rust_code(rust_code, kind)
         
         if not actual_name:
             logger.warning(f"无法从代码中提取类型名: {rust_code[:50]}...")
@@ -657,7 +647,12 @@ edition = "2021"
         return actual_name if actual_name else "unknown"
     
     def _update_global_state(self, code_item):
-        """更新全局状态信息"""
+        """
+        更新全局状态，包括常量集合和类型定义
+        
+        Args:
+            code_item: CodeItem实例
+        """
         # 如果是常量定义，添加到全局常量集合
         if code_item.kind == "defines":
             constants = re.findall(r'(?:pub )?const (\w+):', code_item.rust_code)
@@ -665,10 +660,7 @@ edition = "2021"
         
         # 如果是类型定义，添加到类型定义集合
         if code_item.kind in ["typedefs", "structs"]:
-            # 提取实际名称
-            actual_name = self._extract_actual_name(code_item.rust_code, code_item.kind)
-            if actual_name:
-                self.type_definitions[actual_name] = code_item.rust_code
+            self.type_definitions[code_item.actual_name] = code_item.rust_code
 
 
 class CodeItem:

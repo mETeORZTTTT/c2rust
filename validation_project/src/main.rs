@@ -7,10 +7,10 @@ use std::any::Any;
 
 fn main() {
     println!("验证了 128 个转换项目（按依赖关系排序）");
-    println!("  defines: 15 个");
+    println!("  defines: 14 个");
     println!("  typedefs: 2 个");
     println!("  structs: 10 个");
-    println!("  functions: 101 个");
+    println!("  functions: 102 个");
 }
 
 // ==================== DEFINES ====================
@@ -32,17 +32,6 @@ const ZOPFLI_NUM_LL: usize = 288;
 
 // 来自文件: zopfli
 pub const ZOPFLI_NUM_D: usize = 32;
-
-// 来自文件: zopfli
-pub fn zopfli_append_data<T>(value: T, data: &mut Vec<T>) {
-    let size = data.len();
-    if size.is_power_of_two() {
-        // Double the allocation size if it's a power of two
-        data.reserve(size);
-        data.extend((0..size).map(|_| unsafe { std::mem::zeroed() })); // Unsafe used to initialize with zeroes
-    }
-    data.push(value);
-}
 
 // 来自文件: zopfli
 const ZOPFLI_CACHE_LENGTH: usize = 8;
@@ -736,6 +725,17 @@ pub fn add_lz77_data(
     d_lengths: &[u32],
     bp: &mut u8,
     out: &mut Option<Vec<u8>>,
+    outsize: &mut usize,
+)  {
+    return
+}
+
+// 来自文件: zopfli [依赖: 1 个]
+pub fn add_dynamic_tree(
+    ll_lengths: &[u32],
+    d_lengths: &[u32],
+    bp: &mut u8,
+    out: &mut *mut u8,
     outsize: &mut usize,
 )  {
     return
