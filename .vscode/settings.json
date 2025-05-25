@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "__locale": "c",
+        "ios": "c"
+    },
+    "python.defaultInterpreterPath": "${workspaceFolder}/venv/bin/python"
+}

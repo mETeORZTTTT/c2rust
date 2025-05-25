@@ -1,0 +1,40 @@
+2025-05-25 18:31:53,171 - INFO - 初始化函数总结生成器...
+2025-05-25 18:31:53,171 - INFO - 初始化函数总结生成器
+2025-05-25 18:31:53,270 - INFO - 使用输入文件: data/converted_architecture.json
+2025-05-25 18:31:53,270 - INFO - 最大处理项数: 1000
+2025-05-25 18:31:53,270 - INFO - ================================================================================
+2025-05-25 18:31:53,270 - INFO - 开始处理架构文件: data/converted_architecture.json
+2025-05-25 18:31:53,270 - INFO - ================================================================================
+2025-05-25 18:31:53,273 - INFO - 检测到现有输出文件: data/converted_architecture_with_summaries.json，读取已处理状态
+2025-05-25 18:31:53,276 - WARNING - 函数缺少必要信息: zopfli::AddDynamicTree(const unsigned int *, const unsigned int *, unsigned char *, unsigned char **, size_t *)
+2025-05-25 18:31:53,276 - WARNING - 函数缺少必要信息: zopfli::main()
+2025-05-25 18:31:53,276 - INFO - 找到 6 个需要生成总结的函数
+2025-05-25 18:31:53,276 - INFO - 已有 95 个函数有总结
+2025-05-25 18:31:53,276 - WARNING - 无法继续处理，可能存在循环依赖
+2025-05-25 18:31:53,280 - INFO - ================================================================================
+2025-05-25 18:31:53,280 - INFO - 处理完成: 成功=0, 失败=0, 总计=0/6
+2025-05-25 18:31:53,280 - INFO - 结果已保存到: data/converted_architecture_with_summaries.json
+2025-05-25 18:31:53,280 - INFO - ================================================================================
+2025-05-25 18:31:53,280 - WARNING - 还有 6/6 个函数未处理，可能是由于循环依赖
+2025-05-25 18:31:53,280 - INFO - 
+未处理函数列表及原因:
+2025-05-25 18:31:53,280 - INFO - 1. zopfli::functions::ZopfliDeflatePart(const ZopfliOptions *, int, int, const unsigned char *, size_t, size_t, unsigned char *, unsigned char **, size_t *)
+2025-05-25 18:31:53,280 - INFO -    原因: 等待依赖项完成总结，缺失 2 个依赖:
+2025-05-25 18:31:53,280 - INFO -       1. zopfli::functions::AddLZ77Block(const ZopfliOptions *, int, int, const ZopfliLZ77Store *, size_t, size_t, size_t, unsigned char *, unsigned char **, size_t *)
+2025-05-25 18:31:53,280 - INFO -       2. zopfli::functions::AddLZ77BlockAutoType(const ZopfliOptions *, int, const ZopfliLZ77Store *, size_t, size_t, size_t, unsigned char *, unsigned char **, size_t *)
+2025-05-25 18:31:53,280 - INFO - 2. zopfli::functions::ZopfliDeflate(const ZopfliOptions *, int, int, const unsigned char *, size_t, unsigned char *, unsigned char **, size_t *)
+2025-05-25 18:31:53,281 - INFO -    原因: 等待依赖项完成总结，缺失 1 个依赖:
+2025-05-25 18:31:53,281 - INFO -       1. zopfli::functions::ZopfliDeflatePart(const ZopfliOptions *, int, int, const unsigned char *, size_t, size_t, unsigned char *, unsigned char **, size_t *)
+2025-05-25 18:31:53,281 - INFO - 3. zopfli::functions::AddLZ77Block(const ZopfliOptions *, int, int, const ZopfliLZ77Store *, size_t, size_t, size_t, unsigned char *, unsigned char **, size_t *)
+2025-05-25 18:31:53,281 - INFO -    原因: 等待依赖项完成总结，缺失 1 个依赖:
+2025-05-25 18:31:53,281 - INFO -       1. zopfli::functions::AddDynamicTree(const unsigned int *, const unsigned int *, unsigned char *, unsigned char **, size_t *)
+2025-05-25 18:31:53,281 - INFO - 4. zopfli::functions::AddLZ77BlockAutoType(const ZopfliOptions *, int, const ZopfliLZ77Store *, size_t, size_t, size_t, unsigned char *, unsigned char **, size_t *)
+2025-05-25 18:31:53,281 - INFO -    原因: 等待依赖项完成总结，缺失 1 个依赖:
+2025-05-25 18:31:53,281 - INFO -       1. zopfli::functions::AddLZ77Block(const ZopfliOptions *, int, int, const ZopfliLZ77Store *, size_t, size_t, size_t, unsigned char *, unsigned char **, size_t *)
+2025-05-25 18:31:53,281 - INFO - 5. zopfli::functions::single_test(const unsigned char *, int, int, int)
+2025-05-25 18:31:53,281 - INFO -    原因: 等待依赖项完成总结，缺失 1 个依赖:
+2025-05-25 18:31:53,281 - INFO -       1. zopfli::functions::ZopfliDeflate(const ZopfliOptions *, int, int, const unsigned char *, size_t, unsigned char *, unsigned char **, size_t *)
+2025-05-25 18:31:53,281 - INFO - 6. zopfli::functions::run_all_tests(const unsigned char *)
+2025-05-25 18:31:53,281 - INFO -    原因: 等待依赖项完成总结，缺失 1 个依赖:
+2025-05-25 18:31:53,281 - INFO -       1. zopfli::functions::single_test(const unsigned char *, int, int, int)
+2025-05-25 18:31:53,281 - INFO - 函数总结生成完成!

@@ -1,0 +1,108 @@
+2025-05-24 22:16:57,553 - INFO - 开始实现函数: ZopfliLengthsToSymbols(const unsigned int *, size_t, unsigned int, unsigned int *)
+2025-05-24 22:16:57,553 - INFO - 原始C代码: void ZopfliLengthsToSymbols (const unsigned *lengths ,size_t n ,unsigned maxbits ,unsigned *symbols ){size_t *bl_count =(size_t *)malloc (sizeof (size_t )*(maxbits +1 ));size_t *next_code =(size_t *)malloc (sizeof (size_t )*(maxbits +1 ));unsigned bits ,i ;unsigned code ;for (i =0 ;i <n ;i ++){symbols [i ]=0 ;}/* 1) Count the number of codes for each code length. Let bl_count[N] be the
+    number of codes of length N, N >= 1. */ for (bits =0 ;bits <=maxbits ;bits ++){bl_count [bits ]=0 ;}for (i =0 ;i <n ;i ++){assert (lengths [i ]<=maxbits );bl_count [lengths [i ]]++;}/* 2) Find the numerical value of the smallest code for each code length. */ code =0 ;bl_count [0 ]=0 ;for (bits =1 ;bits <=maxbits ;bits ++){code =(code +bl_count [bits -1 ])<<1 ;next_code [bits ]=code ;}/* 3) Assign numerical values to all codes, using consecutive values for all
+    codes of the same length with the base values determined at step 2. */ for (i =0 ;i <n ;i ++){unsigned len =lengths [i ];if (len !=0 ){symbols [i ]=next_code [len ];next_code [len ]++;}}free (bl_count );free (next_code );}
+2025-05-24 22:16:57,553 - INFO - Rust签名: pub fn zopfli_lengths_to_symbols(lengths: &[u32], n: usize, maxbits: u32, symbols: &mut [u32]) {
+    // Placeholder implementation
+    todo!();
+}
+2025-05-24 22:16:57,553 - INFO - 依赖项数量: 0
+2025-05-24 22:17:05,531 - DEBUG - JSON提取失败或无rust_implementation字段
+2025-05-24 22:17:05,534 - DEBUG - 通过代码块提取获得有效代码
+2025-05-24 22:17:05,536 - INFO - AI生成的实现: pub fn zopfli_lengths_to_symbols(lengths: &[u32], n: usize, maxbits: u32, symbols: &mut [u32]) {
+    use std::alloc::{alloc, dealloc, Layout};
+    use std::ptr;
+    unsafe {
+        // Allocate memory for bl_count and next_code
+        let bl_count_layout = Layout::array::<usize>((maxbits + 1) as usize).unwrap();
+        let next_code_layout = Layout::array::<usize>((maxbits + 1) as usize).unwrap();
+        let bl_count_ptr = alloc(bl_count_layout) as *mut usize;
+        let next_code_ptr = alloc(next_code_layout) as *mut usize;
+        if bl_count_ptr.is_null() || next_code_ptr.is_null() {
+            panic!("Memory allocation failed");
+        }
+        // Initialize symbols array to 0
+        for i in 0..n {
+            symbols[i] = 0;
+        }
+        // 1) Count the number of codes for each code length
+        for bits in 0..=maxbits {
+            ptr::write(bl_count_ptr.add(bits as usize), 0);
+        }
+        for i in 0..n {
+            assert!(lengths[i] <= maxbits);
+            let len = lengths[i] as usize;
+            let count = ptr::read(bl_count_ptr.add(len));
+            ptr::write(bl_count_ptr.add(len), count + 1);
+        }
+        // 2) Find the numerical value of the smallest code for each code length
+        let mut code = 0;
+        ptr::write(bl_count_ptr.add(0), 0);
+        for bits in 1..=maxbits {
+            let prev_count = ptr::read(bl_count_ptr.add((bits - 1) as usize));
+            code = (code + prev_count) << 1;
+            ptr::write(next_code_ptr.add(bits as usize), code);
+        }
+        // 3) Assign numerical values to all codes
+        for i in 0..n {
+            let len = lengths[i] as usize;
+            if len != 0 {
+                let next_code = ptr::read(next_code_ptr.add(len));
+                symbols[i] = next_code as u32;
+                ptr::write(next_code_ptr.add(len), next_code + 1);
+            }
+        }
+        // Free allocated memory
+        dealloc(bl_count_ptr as *mut u8, bl_count_layout);
+        dealloc(next_code_ptr as *mut u8, next_code_layout);
+    }
+}
+2025-05-24 22:17:05,541 - DEBUG - 生成的main.rs内容:
+pub fn zopfli_lengths_to_symbols(lengths: &[u32], n: usize, maxbits: u32, symbols: &mut [u32]) {
+    use std::alloc::{alloc, dealloc, Layout};
+    use std::ptr;
+    unsafe {
+        // Allocate memory for bl_count and next_code
+        let bl_count_layout = Layout::array::<usize>((maxbits + 1) as usize).unwrap();
+        let next_code_layout = Layout::array::<usize>((maxbits + 1) as usize).unwrap();
+        let bl_count_ptr = alloc(bl_count_layout) as *mut usize;
+        let next_code_ptr = alloc(next_code_layout) as *mut usize;
+        if bl_count_ptr.is_null() || next_code_ptr.is_null() {
+            panic!("Memory allocation failed");
+        }
+        // Initialize symbols array to 0
+        for i in 0..n {
+            symbols[i] = 0;
+        }
+        // 1) Count the number of codes for each code length
+        for bits in 0..=maxbits {
+            ptr::write(bl_count_ptr.add(bits as usize), 0);
+        }
+        for i in 0..n {
+            assert!(lengths[i] <= maxbits);
+            let len = lengths[i] as usize;
+            let count = ptr::read(bl_count_ptr.add(len));
+            ptr::write(bl_count_ptr.add(len), count + 1);
+        }
+        // 2) Find the numerical value of the smallest code for each code length
+        let mut code = 0;
+        ptr::write(bl_count_ptr.add(0), 0);
+        for bits in 1..=maxbits {
+            let prev_count = ptr::read(bl_count_ptr.add((bits - 1) as usize));
+            code = (code + prev_count) << 1;
+            ptr::write(next_code_ptr.add(bits as usize), code);
+        }
+        // 3) Assign numerical values to all codes
+        for i in 0..n {
+            let len = lengths[i] as usize;
+            if len != 0 {
+                let next_code = ptr::read(next_code_ptr.add(len));
+                symbols[i] = next_code as u32;
+                ptr::write(next_code_ptr.add(len), next_code + 1);
+            }
+        }
+        // Free allocated memory
+        dealloc(bl_count_ptr as *mut u8, bl_count_layout);
+        dealloc(next_code_ptr as *mut u8, next_code_layout);
+    }
+}
