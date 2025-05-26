@@ -169,7 +169,7 @@ class FunctionImplementationGenerator:
                         compile_result = self._check_compilation(
                             implementation_result["implementation"],
                             dependency_info["code_signatures"],
-                            data  # 传递完整的数据
+                            result  # 使用更新后的结果数据，包含当前会话中已实现的函数
                         )
                         
                         # 如果编译通过
@@ -188,7 +188,7 @@ class FunctionImplementationGenerator:
                                 implementation_result["implementation"],
                                 compile_result["errors"],
                                 dependency_info["code_signatures"],
-                                data  # 传递完整的数据
+                                result  # 使用更新后的结果数据
                             )
                             
                             if fix_result["success"]:
@@ -844,8 +844,8 @@ class FunctionImplementationGenerator:
                 
                 # 收集并去重所有类型定义
                 if data:
-                    # 用于去重的字典，键为"kind::实际类型名"
-                    all_converted_items = {}
+                    # 用于去重的字典，键为类型名（不考虑kind）
+                    all_type_definitions = {}
                     skipped_items = []
                     
                     # 1. 收集非函数项（类型定义、结构体等）
@@ -860,27 +860,21 @@ class FunctionImplementationGenerator:
                                     if rust_code:
                                         # 提取实际类型名（用于去重）
                                         actual_type_name = self._extract_type_name_from_code(rust_code, kind)
+                                        
                                         if actual_type_name:
-                                            # 创建唯一键
-                                            unique_key = f"{kind}::{actual_type_name}"
-                                            
                                             # 去重：如果已有同名定义，跳过
-                                            if unique_key in all_converted_items:
+                                            if actual_type_name in all_type_definitions:
                                                 skipped_items.append({
                                                     "id": f"{file_name}::{kind}::{item_name}",
                                                     "type": actual_type_name,
-                                                    "reason": f"已存在定义，来自 {all_converted_items[unique_key]['file']}::{all_converted_items[unique_key]['kind']}::{all_converted_items[unique_key]['name']}"
+                                                    "reason": f"已存在定义"
                                                 })
                                                 continue
                                             
                                             # 记录新项
-                                            all_converted_items[unique_key] = {
+                                            all_type_definitions[actual_type_name] = {
                                                 "id": f"{file_name}::{kind}::{item_name}",
-                                                "name": item_name,
-                                                "file": file_name,
-                                                "kind": kind,
                                                 "code": rust_code,
-                                                "actual_name": actual_type_name,
                                                 "priority": 1  # 非函数项优先
                                             }
                     
@@ -896,36 +890,26 @@ class FunctionImplementationGenerator:
                                 if rust_code:
                                     implemented_functions.append({
                                         "id": f"{file_name}::functions::{func_name}",
-                                        "name": func_name,
-                                        "file": file_name,
-                                        "kind": "functions",
                                         "code": rust_code,
                                         "priority": 2  # 函数实现次优先
                                     })
                     
                     # 按优先级排序，先输出类型定义，再输出函数实现
-                    all_items = list(all_converted_items.values()) + implemented_functions
+                    all_items = list(all_type_definitions.values()) + implemented_functions
                     all_items.sort(key=lambda x: x["priority"])
                     
                     # 记录去重信息
                     if skipped_items:
                         main_logger.debug(f"编译检查：跳过了 {len(skipped_items)} 个重复定义")
-                        for item in skipped_items[:3]:  # 仅显示前3个
-                            main_logger.debug(f"  - 跳过 {item['id']} (类型: {item['type']}), 原因: {item['reason']}")
                     
-                    # 写入所有依赖项
-                    f.write("// ================ 所有类型定义和已实现函数 ================\n\n")
+                    # 写入所有项目
+                    f.write("// ================ 类型定义和已实现函数 ================\n\n")
                     
                     for item in all_items:
-                        f.write(f"// 来自 {item['file']}::{item['kind']}::{item['name']}\n")
+                        f.write(f"// 项目: {item['id']}\n")
                         f.write(f"{item['code']}\n\n")
                 
-                # 添加直接依赖项（向后兼容）
-                if dependencies:
-                    f.write("// ================ 直接依赖项 ================\n\n")
-                    for dep_id, dep_code in dependencies.items():
-                        f.write(f"// 依赖: {dep_id}\n")
-                        f.write(f"{dep_code}\n\n")
+                # 不再单独添加dependencies！这是问题根源
                 
                 # 添加当前要验证的函数实现
                 f.write("// ================ 当前验证的函数实现 ================\n\n")
@@ -991,7 +975,6 @@ class FunctionImplementationGenerator:
                     "stdout": "",
                     "errors": ["未找到cargo命令"]
                 }
-
     def _extract_type_name_from_code(self, code, kind):
         """从代码中提取类型名，用于去重"""
         import re
@@ -1020,7 +1003,7 @@ class FunctionImplementationGenerator:
         
         # 如果没有匹配到任何模式，返回None
         return None
-    def _fix_implementation(self, implementation, compile_errors, dependencies, data):
+   
         """修复编译错误"""
         main_logger.info(f"开始修复编译错误 (共 {len(compile_errors)} 个)")
         
@@ -1103,6 +1086,133 @@ class FunctionImplementationGenerator:
                 
                 # 重新检查编译 - 使用完整的数据参数
                 compile_result = self._check_compilation(current_impl, dependencies, data)
+                
+                if compile_result["success"]:
+                    # 修复成功
+                    main_logger.info(f"✅ 编译错误修复成功，用了 {round_num} 轮")
+                    return {
+                        "success": True,
+                        "implementation": current_impl,
+                        "rounds": round_num
+                    }
+                else:
+                    # 更新错误列表
+                    compile_errors = compile_result["errors"]
+                    main_logger.warning(f"轮次 {round_num} 后仍有 {len(compile_errors)} 个编译错误")
+                    
+                    # 如果是最后一轮，返回失败
+                    if round_num >= max_fix_rounds:
+                        main_logger.error("达到最大修复轮数，修复失败")
+                        break
+            
+            except Exception as e:
+                error_msg = f"修复过程发生错误: {str(e)}"
+                main_logger.error(error_msg)
+                ai_dialog_logger.error(error_msg)
+                break
+        
+        # 修复失败
+        return {
+            "success": False,
+            "implementation": current_impl,
+            "rounds": rounds,
+            "error": "达到最大修复轮数仍未解决编译错误"
+        }
+    def _fix_implementation(self, implementation, compile_errors, dependencies, data):
+        """修复编译错误"""
+        main_logger.info(f"开始修复编译错误 (共 {len(compile_errors)} 个)")
+        
+        # 使用C2Rust转换器的错误修复功能
+        max_fix_rounds = 5
+        rounds = 0
+        current_impl = implementation
+        
+        # 收集依赖项签名信息，用于提示
+        dependency_signatures = []
+        if dependencies:
+            for dep_id, dep_code in dependencies.items():
+                dependency_signatures.append(f"### {dep_id}\n```rust\n{dep_code}\n```\n")
+        
+        # 也可以从data中收集特定依赖的签名（如果需要）
+        
+        for round_num in range(1, max_fix_rounds + 1):
+            main_logger.info(f"修复轮次 {round_num}/{max_fix_rounds}")
+            
+            # 提取最关键的错误消息
+            error_summaries = []
+            for error in compile_errors[:5]:  # 仅使用前5个错误
+                error_lines = error.strip().split('\n')
+                if error_lines:
+                    error_line = error_lines[0].strip()
+                    if len(error_line) > 150:
+                        error_line = error_line[:150] + "..."
+                    error_summaries.append(error_line)
+            
+            # 构建错误修复的提示
+            fix_prompt = f"""修复这个Rust函数实现中的编译错误:
+
+    ## 当前实现:
+    ```rust
+    {current_impl}
+    ```
+
+    ## 编译错误:
+    {chr(10).join(error_summaries)}
+    """
+
+            # 添加依赖项签名信息
+            if dependency_signatures:
+                fix_prompt += "\n## 依赖项签名:\n" + "".join(dependency_signatures) + "\n"
+
+            fix_prompt += """
+    ## 修复要求:
+    1. 保持函数签名不变，只修改实现部分
+    2. 修复所有编译错误
+    3. 不要改变函数的基本行为和算法
+    4. 确保代码简洁、高效
+    5. 不要添加任何导入语句，编译环境已经提供了所有必要的类型和函数定义
+
+    直接返回修复后的完整函数实现:
+    ```rust
+    // 修复后的代码...
+    ```
+    """
+            
+            # 记录对话
+            ai_dialog_logger.info(f"=========== 修复轮次 {round_num}/{max_fix_rounds} ===========")
+            ai_dialog_logger.info(f"修复提示: {fix_prompt}")
+            
+            try:
+                # 调用AI进行修复 - 使用消息数组格式
+                response = self.agent1.ask([
+                    {"role": "system", "content": "你是一个专门修复Rust编译错误的专家。请直接返回修复后的代码，不要添加任何解释或导入语句。"},
+                    {"role": "user", "content": fix_prompt}
+                ])
+                
+                ai_dialog_logger.info(f"AI修复回复: {response}")
+                
+                # 提取代码块
+                fixed_code = TextExtractor.extract_code_block(response)
+                
+                if not fixed_code:
+                    # 如果找不到代码块，尝试直接使用整个响应
+                    fixed_code = response.strip()
+                    # 继续尝试过滤，只保留看起来像代码的部分
+                    if "fn " in fixed_code:
+                        start_idx = fixed_code.find("fn ")
+                        fixed_code = fixed_code[start_idx:].strip()
+                
+                # 如果还是无法获得有效代码
+                if not fixed_code or "fn " not in fixed_code:
+                    main_logger.warning(f"无法提取修复代码，跳过轮次 {round_num}")
+                    continue
+                
+                # 更新当前实现
+                current_impl = fixed_code
+                rounds = round_num
+                
+                # 重新检查编译 - 使用完整的数据参数
+                compile_result = self._check_compilation(current_impl, {}, data)  # 不传递dependencies参数，避免重复
                 
                 if compile_result["success"]:
                     # 修复成功

@@ -1,0 +1,44 @@
+Exit Code: 101
+===== STDOUT =====
+
+===== STDERR =====
+[1m[32m    Updating[0m crates.io index
+[1m[32m     Locking[0m 1 package to latest compatible version
+[1m[32m   Compiling[0m libc v0.2.172
+[1m[32m    Checking[0m rust_implementation_check v0.1.0 (/Users/ormete/PycharmCode/gpt3.5_api/cParser/debug_compile/debug_project_20250525_233307)
+[0m[1m[38;5;9merror[E0428][0m[0m[1m: the name `ZopfliBlockState` is defined multiple times[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:189:1[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m171[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub struct ZopfliBlockState {[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;12m---------------------------[0m[0m [0m[0m[1m[38;5;12mprevious definition of the type `ZopfliBlockState` here[0m
+[0m[1m[38;5;12m...[0m
+[0m[1m[38;5;12m189[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0mpub struct ZopfliBlockState {[0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m [0m[0m[1m[38;5;9m^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[0m [0m[0m[1m[38;5;9m`ZopfliBlockState` redefined here[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: `ZopfliBlockState` must be defined only once in the type namespace of this module[0m
+
+[0m[1m[38;5;9merror[E0119][0m[0m[1m: conflicting implementations of trait `Debug` for type `ZopfliBlockState`[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:188:10[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m170[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m#[derive(Debug, Clone)][0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m          [0m[0m[1m[38;5;12m-----[0m[0m [0m[0m[1m[38;5;12mfirst implementation here[0m
+[0m[1m[38;5;12m...[0m
+[0m[1m[38;5;12m188[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m#[derive(Debug, Clone)][0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m          [0m[0m[1m[38;5;9m^^^^^[0m[0m [0m[0m[1m[38;5;9mconflicting implementation for `ZopfliBlockState`[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: this error originates in the derive macro `Debug` (in Nightly builds, run with -Z macro-backtrace for more info)[0m
+
+[0m[1m[38;5;9merror[E0119][0m[0m[1m: conflicting implementations of trait `Clone` for type `ZopfliBlockState`[0m
+[0m   [0m[0m[1m[38;5;12m--> [0m[0msrc/main.rs:188:17[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m[1m[38;5;12m170[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m#[derive(Debug, Clone)][0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[38;5;12m-----[0m[0m [0m[0m[1m[38;5;12mfirst implementation here[0m
+[0m[1m[38;5;12m...[0m
+[0m[1m[38;5;12m188[0m[0m [0m[0m[1m[38;5;12m|[0m[0m [0m[0m#[derive(Debug, Clone)][0m
+[0m    [0m[0m[1m[38;5;12m|[0m[0m                 [0m[0m[1m[38;5;9m^^^^^[0m[0m [0m[0m[1m[38;5;9mconflicting implementation for `ZopfliBlockState`[0m
+[0m    [0m[0m[1m[38;5;12m|[0m
+[0m    [0m[0m[1m[38;5;12m= [0m[0m[1mnote[0m[0m: this error originates in the derive macro `Clone` (in Nightly builds, run with -Z macro-backtrace for more info)[0m
+
+[0m[1mSome errors have detailed explanations: E0119, E0428.[0m
+[0m[1mFor more information about an error, try `rustc --explain E0119`.[0m
+[1m[31merror[0m[1m:[0m could not compile `rust_implementation_check` (bin "rust_implementation_check") due to 3 previous errors
