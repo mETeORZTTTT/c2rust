@@ -1,0 +1,78 @@
+Exit code: 101
+
+=== STDOUT ===
+
+
+=== STDERR ===
+    Updating crates.io index
+     Locking 1 package to latest compatible version
+   Compiling libc v0.2.172
+    Checking rust_impl_check_20250527_000002 v0.1.0 (/Users/ormete/PycharmCode/gpt3.5_api/cParser/debug_compile/rust_impl_check_20250527_000002)
+error[E0599]: no method named `len` found for raw pointer `*mut u16` in the current scope
+    --> src/main.rs:1866:34
+     |
+1866 |     assert!(lend <= lz77.litlens.len());
+     |                                  ^^^
+     |
+help: there is a method `le` with a similar name, but with different arguments
+    --> /Users/ormete/.rustup/toolchains/nightly-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/cmp.rs:1389:5
+     |
+1389 |     fn le(&self, other: &Rhs) -> bool {
+     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0599]: no method named `len` found for raw pointer `*mut u16` in the current scope
+    --> src/main.rs:1867:32
+     |
+1867 |     assert!(lend <= lz77.dists.len());
+     |                                ^^^
+     |
+help: there is a method `le` with a similar name, but with different arguments
+    --> /Users/ormete/.rustup/toolchains/nightly-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/cmp.rs:1389:5
+     |
+1389 |     fn le(&self, other: &Rhs) -> bool {
+     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0608]: cannot index into a value of type `*mut u16`
+    --> src/main.rs:1873:34
+     |
+1873 |         let litlen = lz77.litlens[i] as usize;
+     |                                  ^^^
+     |
+help: consider using `wrapping_add` or `add` for indexing into raw pointer
+     |
+1873 |         let litlen = lz77.litlens.wrapping_add(i) as usize;
+     |                                  ~~~~~~~~~~~~~~ ~
+
+error[E0608]: cannot index into a value of type `*mut u16`
+    --> src/main.rs:1874:30
+     |
+1874 |         let dist = lz77.dists[i] as i32;
+     |                              ^^^
+     |
+help: consider using `wrapping_add` or `add` for indexing into raw pointer
+     |
+1874 |         let dist = lz77.dists.wrapping_add(i) as i32;
+     |                              ~~~~~~~~~~~~~~ ~
+
+warning: unnecessary `unsafe` block
+   --> src/main.rs:259:18
+    |
+259 |     let result = unsafe {
+    |                  ^^^^^^ unnecessary `unsafe` block
+    |
+    = note: `#[warn(unused_unsafe)]` on by default
+
+warning: variable does not need to be mutable
+    --> src/main.rs:1008:13
+     |
+1008 |         let mut start = i;
+     |             ----^^^^^
+     |             |
+     |             help: remove this `mut`
+     |
+     = note: `#[warn(unused_mut)]` on by default
+
+Some errors have detailed explanations: E0599, E0608.
+For more information about an error, try `rustc --explain E0599`.
+warning: `rust_impl_check_20250527_000002` (bin "rust_impl_check_20250527_000002") generated 2 warnings
+error: could not compile `rust_impl_check_20250527_000002` (bin "rust_impl_check_20250527_000002") due to 4 previous errors; 2 warnings emitted
